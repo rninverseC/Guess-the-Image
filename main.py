@@ -23,4 +23,3 @@ compressed_img = svd_compress('your_image.jpg', 50)
 plt.imshow(compressed_img, cmap='gray')
 plt.title("Compressed Image (k=50)")
 plt.show()
-Use code with caution.
