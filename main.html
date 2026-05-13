@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVD Image Compressor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .control-panel { margin-bottom: 20px; padding: 15px; background: #f4f4f4; border-radius: 5px; }
+        label { font-weight: bold; margin-right: 10px; }
+        input[type="number"] { width: 60px; margin-right: 20px; }
+    </style>
+</head>
+<body>
+    <h1>SVD Image Compressor</h1>
+    
+    <!-- Form to submit data back to the Python backend -->
+    <div class="control-panel">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="image">Choose Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            
+            <label for="k_value">K Components:</label>
+            <input type="number" id="k_value" name="k_value" value="{{ k_value|default(50) }}" min="1" max="300" required>
+            
+            <button type="submit">Compress Image</button>
+        </form>
+    </div>
+
+    <!-- Only display the image if graph_image exists in the template context -->
+    {% if graph_image %}
+    <h2>Result (k = {{ k_value }})</h2>
+    <div>
+        <img src="data:image/png;base64,{{ graph_image }}" alt="SVD Compressed Image">
+    </div>
+    {% endif %}
+</body>
+</html>
