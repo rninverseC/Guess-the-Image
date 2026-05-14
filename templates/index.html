@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess The Image</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+        img { max-width: 400px; height: auto; border: 2px solid #333; margin: 20px; }
+        .options { margin: 20px; }
+        button { margin: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .correct { background-color: green; color: white; }
+        .wrong { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Guess The Image</h1>
+    <p>Look at the compressed image and guess what fruit it is!</p>
+    
+    <p>Current compression level (singular values): {{ n }}</p>
+    
+    <form method="get" style="margin: 20px;">
+        <label for="n">Adjust compression level:</label>
+        <input type="number" id="n" name="n" value="{{ n }}" min="1" max="200" style="margin: 0 10px;">
+        <button type="submit">Update Image</button>
+    </form>
+    
+    <!-- Display the base64 encoded image -->
+    <img src="data:image/png;base64,{{ img_data }}" alt="Compressed Image">
+    
+    <div class="options">
+        <h2>Choose the correct fruit:</h2>
+        {% for option in options %}
+        <button onclick="guess('{{ option }}')">{{ option }}</button>
+        {% endfor %}
+    </div>
+    
+    <div id="result" style="margin-top: 20px;"></div>
+    
+    <script>
+        function guess(selected) {
+            const correct = '{{ correct }}';
+            const resultDiv = document.getElementById('result');
+            if (selected === correct) {
+                resultDiv.innerHTML = '<p class="correct">Correct! It was ' + correct + '.</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="wrong">Wrong! It was ' + correct + '.</p>';
+            }
+            // Disable buttons after guess
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+        }
+    </script>
+</body>
+</html>
