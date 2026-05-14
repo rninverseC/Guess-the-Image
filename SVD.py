@@ -1,7 +1,3 @@
-# Source - https://stackoverflow.com/a/62832478
-# Posted by Zephyr
-# Retrieved 2026-05-13, License - CC BY-SA 4.0
-
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
