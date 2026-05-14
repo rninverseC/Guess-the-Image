@@ -1,10 +1,9 @@
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
+import io
+import base64
 
-img = Image.open('bee.jpg')
-img = np.mean(img, 2)
-def compressImg(image_path, n=10):
+def compressImg(image_path, n):
     # Load and process image
     img_obj = Image.open(image_path)
     # Convert to grayscale numpy array for SVD
